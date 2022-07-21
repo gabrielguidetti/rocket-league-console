@@ -1,20 +1,22 @@
 package application;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
 import processos.Corrida;
+import processos.EnfeitesTela;
 
 public class Program {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Locale.setDefault(Locale.US);
-		int escolha = 9;
+		int escolha = -1;
 		
 		while(escolha != 0) {
-			clearScreen();
-			System.out.println("=======ESCOLA AS OPÇÕES=======");
+			limparTela();
+			EnfeitesTela.menuOpcao();
 			System.out.println("1 - Montar uma corrida");
 			System.out.println("0 - SAIR");
 			System.out.print("Sua opção: ");
@@ -22,19 +24,24 @@ public class Program {
 			
 			switch(escolha) {
 				case 1:
-					clearScreen();
-					Corrida corrida = new Corrida(1);
+					corridaCompleta();
 					break;
 			}
 		}
-		
-		
 		sc.close();
 	}
 	
-	public static void clearScreen() {
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
+	public static void corridaCompleta() {
+		limparTela();
+		Corrida corrida = new Corrida(1);
 	}
-
+	
+	public static void limparTela() {
+		try {
+	        if (System.getProperty("os.name").contains("Windows"))
+	            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+	        else
+	            Runtime.getRuntime().exec("clear");
+	    } catch (IOException | InterruptedException ex) {}
+	}
 }
