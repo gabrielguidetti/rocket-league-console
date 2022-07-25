@@ -1,7 +1,7 @@
 package entities;
 
 public class Carro {
-	
+
 	private String apelido;
 	private String modelo;
 	
@@ -24,6 +24,11 @@ public class Carro {
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
+	}
+	
+	@Override
+	public String toString() {
+		return apelido + " / " + modelo;
 	}
 	
 }

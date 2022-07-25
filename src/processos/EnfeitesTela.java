@@ -17,6 +17,10 @@ public class EnfeitesTela {
 		System.out.println("=======HISTÓRICO DE CORRIDAS=======");
 	}
 	
+	public static void garagem() {
+		System.out.println("=======GARAGEM=======");
+	}
+	
 	public static void limparTela() {
 		try {
 	        if (System.getProperty("os.name").contains("Windows"))
