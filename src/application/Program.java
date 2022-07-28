@@ -2,11 +2,13 @@ package application;
 
 import java.util.Locale;
 import java.util.Scanner;
+
 import entities.Carteira;
 import entities.Corrida;
 import entities.Garagem;
 import entities.HistoricoCorridas;
 import entities.Motorista;
+import exceptions.ErroNumeroException;
 import processos.EnfeitesTela;
 
 public class Program {
@@ -31,7 +33,19 @@ public class Program {
 			System.out.println("4 - Ver garagem");
 			System.out.println("0 - SAIR");
 			System.out.print("Sua opção: ");
-			escolha = sc.nextInt();
+			try {
+				escolha = sc.nextInt();
+				if(escolha < 0 || escolha > 4){
+					throw new ErroNumeroException("Apenas números de 0 a 4 são válidos!");
+				}
+			} catch(ErroNumeroException e) {
+				System.out.println(e.getMessage());
+				escolha = -1;
+				sc.next();
+			} catch(RuntimeException e) {
+				System.out.println("Apenas números válidos!");
+				escolha = -1;
+			}
 			
 			switch(escolha) {
 				case 1:
@@ -86,7 +100,9 @@ public class Program {
 	}
 	
 	public static void mostrarGaragem() {
-		
+		EnfeitesTela.limparTela();
+		System.out.println(jogador.getGaragem());
+		sc.next();
 	}
 	
 }
